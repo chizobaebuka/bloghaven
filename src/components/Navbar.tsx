@@ -6,13 +6,17 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { Switch } from "./ui/switch"
 import MobileMenu from "./MobileMenu"
 import { usePathname } from "next/navigation"
+import { useContext } from "react"
+import { ThemeContext } from "@/context/themeContext"
 
 const Navbar = () => {
 
     const pathname = usePathname()
 
+    const { isDarkMode, toggleTheme }: any = useContext(ThemeContext);
+
     return (
-        <header className="py-4 bg-white text-gray-900 shadow-md transition-colors duration-300">
+        <header className={`py-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-md transition-colors duration-300`}>
             <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
                 {/* logo */}
                 <div className="text-xl font-bold">
@@ -65,7 +69,10 @@ const Navbar = () => {
 
                 {/* toggle dark and bright mode and logon btn */}
                 <div className="hidden lg:flex items-center space-x-4">
-                    <div className="flex items-center">
+                    <div 
+                        className="flex items-center"
+                        onClick={toggleTheme}
+                    >
                         <span className="mr-2">Dark Mode</span>
                         <Switch />
                     </div>
