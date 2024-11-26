@@ -7,13 +7,15 @@ import { Switch } from "./ui/switch"
 import MobileMenu from "./MobileMenu"
 import { usePathname } from "next/navigation"
 import { useContext } from "react"
-import { ThemeContext } from "@/context/themeContext"
+import { ThemeContext, ThemeContextType } from "@/context/themeContext"
 
 const Navbar = () => {
 
     const pathname = usePathname()
 
-    const { isDarkMode, toggleTheme }: any = useContext(ThemeContext);
+    // const { isDarkMode, toggleTheme }: any = useContext(ThemeContext);
+    // Specify the type of the context value
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext) as ThemeContextType;
 
     return (
         <header className={`py-4 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} shadow-md transition-colors duration-300`}>
